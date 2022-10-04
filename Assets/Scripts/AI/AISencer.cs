@@ -17,7 +17,7 @@ public class AISencer : MonoBehaviour
 
     void Update()
     {
-        // 상태 변화를 playerState에 받아오기   
+        // 상태 변화를 playerState에 받아오기 or 이벤트로 상황 받기
     }
 
     /// <summary>
@@ -28,7 +28,7 @@ public class AISencer : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            // 플레이어의 상태를 받아와서 행동
+            // 플레이어의 상태를 받아오기
 
             switch (playerState)
             {

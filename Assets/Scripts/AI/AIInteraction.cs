@@ -6,7 +6,6 @@ public class AIInteraction : MonoBehaviour
 {
 
 
-
     void Start()
     {
         
@@ -18,15 +17,15 @@ public class AIInteraction : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// 다음 아이템 순서를 받아옴
     /// </summary>
     private void GetNextItem()
     {
-        // 아이템 매니저에서 일해야 할 순서 받아오기
+        
     }
 
     /// <summary>
-    /// 
+    /// 다음 타겟으로 추적??? 이거맞나요?
     /// </summary>
     private void MoveToTrack()
     {
@@ -34,10 +33,10 @@ public class AIInteraction : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// 뺏은 물건을 원래의 위치로 옮기기
     /// </summary>
     private void MoveToOriginalPosition()
     {
-        // 뺏은 물건의 원래 위치를 받아와 거기로 옮기기
+
     }
 }

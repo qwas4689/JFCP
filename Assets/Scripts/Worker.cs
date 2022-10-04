@@ -6,7 +6,6 @@ public abstract class Worker : MonoBehaviour
 {
     private PlayerInteraction playerInteraction;
 
-
     [SerializeField]
     private Item _pickedItem;
 
@@ -21,35 +20,18 @@ public abstract class Worker : MonoBehaviour
         playerInteraction = GetComponent<PlayerInteraction>();
     }
 
-    protected void OnFocusItem()
-    {
+    protected abstract void OnFocusItem();
 
-    }
-    
-    protected void OutFocusItem()
-    {
+    protected abstract void OutFocusItem();
 
-    }
+    protected abstract void PackItem();
 
-    protected void PackItem()
-    {
+    protected abstract void PickItem();
 
-    }
-    protected void PickItem()
-    {
+    protected abstract void DropItem();
 
-    }
-    protected void DropItem()
-    {
+    protected abstract void SelectTool();
 
-    }
-    protected void SelectTool()
-    {
-
-    }
-    protected void UseToolToItem()
-    {
-
-    }
+    protected abstract void UseToolToItem();
 
 }
