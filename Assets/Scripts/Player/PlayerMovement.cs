@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        _rigidbody.MovePosition(new Vector3(_playerInput.Xinput * _moveSpeed, 0, _playerInput.Zinput));
+        _rigidbody.MovePosition(new Vector3(_playerInput.Xinput * _moveSpeed, 0, _playerInput.Zinput * _moveSpeed));
 
     }
     void Rotate()
