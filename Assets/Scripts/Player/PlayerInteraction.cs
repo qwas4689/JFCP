@@ -1,18 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Item item;
+
+    public UnityEvent<bool> OnPack = new UnityEvent<bool>();
+    public UnityEvent OnPickUp = new UnityEvent();
+    public UnityEvent<bool> OnUnPack = new UnityEvent<bool>();
+    public UnityEvent OnDropItem = new UnityEvent();
+
+
+    
+
+    private void UnPackItem()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public Item DropItem()
     {
-        
+        return item;
     }
+    
+
+    
 }

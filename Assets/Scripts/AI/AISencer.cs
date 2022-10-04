@@ -5,6 +5,7 @@ using UnityEngine;
 public class AISencer : MonoBehaviour
 {
     private PlayerInteraction playerInteraction;
+    private Camera aiSight;
 
     private int playerState;
 
@@ -19,6 +20,10 @@ public class AISencer : MonoBehaviour
         // 상태 변화를 playerState에 받아오기   
     }
 
+    /// <summary>
+    /// 플레이어와 닿았을 때 실행
+    /// </summary>
+    /// <param name="other">플레이어</param>
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
