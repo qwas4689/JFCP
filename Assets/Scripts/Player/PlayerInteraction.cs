@@ -8,11 +8,12 @@ public class PlayerInteraction : Worker
   
     [SerializeField]
     private Transform _rightHand;
+    private PlayerHealth _playerHealth;
     private PlayerInventory _playerInventory;
+    private Item _grapsedItem;
     private LayerMask InterativeLayer = 1 << 5;
     private float _interactDiastance = 5f;
-    private Item _grapsedItem;
-    private Item _item;
+
     public UnityEvent Onpack = new UnityEvent();
     public UnityEvent OnUnPack = new UnityEvent();
 
@@ -20,12 +21,17 @@ public class PlayerInteraction : Worker
     private void Start()
     {
         _playerInventory = GetComponent<PlayerInventory>();
-       _item.OnGrabChanged += PickAndDropItem;
+        _playerHealth = GetComponent<PlayerHealth>();
+        Item.OnGrabChanged -= PickAndDropItem;
+        Item.OnGrabChanged += PickAndDropItem;
+        Obstacle.OnSteppedByPlayer.RemoveListener(DroppedItemByObstacle);
+        Obstacle.OnSteppedByPlayer.AddListener(DroppedItemByObstacle);
         Onpack.RemoveListener(PackItem);
         Onpack.AddListener(PackItem);
         OnUnPack.RemoveListener(UnPackItem);
         OnUnPack.AddListener(UnPackItem);
-        
+        _playerHealth.OnDamage.RemoveListener(DroppedItemByAI);
+        _playerHealth.OnDamage.AddListener(DroppedItemByAI);
     }
    
     private void Update()
@@ -47,7 +53,6 @@ public class PlayerInteraction : Worker
 
         if (Physics.Raycast(ray, out hit, _interactDiastance, InterativeLayer))
         {
-
             if (hit.collider.CompareTag("Item"))
             {
                 _focusedItem = hit.collider.GetComponent<Item>();
@@ -89,7 +94,6 @@ public class PlayerInteraction : Worker
 
     }
 
-
     //protected override void DropItem()
     //{
     //    _grapsedItem = null;
@@ -97,7 +101,11 @@ public class PlayerInteraction : Worker
 
     private void DroppedItemByObstacle()
     {
-        
+        //if(_grapsedItem != null)
+        //{
+        //    _grapsedItem.Gr
+        //}
+
         int ranNum = Random.Range(0, _playerInventory.Inventory.Count);
 
         Item item = _playerInventory.Inventory[ranNum];
@@ -122,8 +130,10 @@ public class PlayerInteraction : Worker
 
     private void OnDisable()
     {
-
+        Item.OnGrabChanged -= PickAndDropItem;
+        Obstacle.OnSteppedByPlayer.RemoveListener(DroppedItemByObstacle);
         Onpack.RemoveListener(PackItem);
         OnUnPack.RemoveListener(UnPackItem);
+        _playerHealth.OnDamage.RemoveListener(DroppedItemByAI);
     }
 }
