@@ -28,10 +28,10 @@ public class AISencer : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if (playerState == Stealing)
-            {
-                // 플레이어가 도둑질 상태일 때 확인
-            }
+            //if (playerState == Stealing)
+            //{
+            //    // 플레이어가 도둑질 상태일 때 확인
+            //}
         }
     }
 }

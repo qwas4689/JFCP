@@ -28,7 +28,7 @@ public class Item : MonoBehaviour
         CurrentState = EItemState.UNPACKED;
         _isPacked = false;
 
-        //ItemManager.Instance.Items.Push(this);
+        ItemManager.Instance.Items.Push(this);
     }
 
     // Heap 테스트 용

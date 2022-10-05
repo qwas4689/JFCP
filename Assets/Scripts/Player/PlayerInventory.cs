@@ -6,11 +6,6 @@ public class PlayerInventory : MonoBehaviour
 {
     public List<Item> Inventory = new List<Item>();
 
-    private void Start()
-    {
-        
-    }
-
     public void PushItemToInventory(Item item)
     {
         if(item != null)
@@ -35,6 +30,6 @@ public class PlayerInventory : MonoBehaviour
 
     public void StoreItem(Item item)
     {
-        // item.GetComponent<Item>().SetStored();
+        item.GetComponent<Item>().SetStored();
     }
 }
