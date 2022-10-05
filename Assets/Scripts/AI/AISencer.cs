@@ -28,26 +28,9 @@ public class AISencer : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            // 플레이어의 상태를 받아오기
-
-            switch (playerState)
+            if (playerState == Stealing)
             {
-                case 1:
-                    // 플레이어가 Idle 일때 지나침
-                    break;
-
-                case 2:
-                    // 플레이어가 포장 해제일 때 
-                    break;
-
-                case 3:
-                    // 플레이어가 도둑질 한 것을 봤을 때
-                    break;
-
-                default:
-                    // 디폴트
-                    break;
-
+                // 플레이어가 도둑질 상태일 때 확인
             }
         }
     }
