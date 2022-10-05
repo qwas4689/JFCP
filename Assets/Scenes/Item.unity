@@ -218,8 +218,8 @@ GameObject:
   - component: {fileID: 1619244933}
   - component: {fileID: 1619244932}
   - component: {fileID: 1619244931}
-  - component: {fileID: 1619244935}
   - component: {fileID: 1619244936}
+  - component: {fileID: 1619244935}
   - component: {fileID: 1619244937}
   m_Layer: 0
   m_Name: Item

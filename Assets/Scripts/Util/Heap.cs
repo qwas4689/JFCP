@@ -9,7 +9,7 @@ namespace Heap
 {
     public class ItemHeap
     {
-        private List<Item> _list;
+        private List<Item> _list = new List<Item>();
         public Item this[int index]
         {
             get
@@ -74,7 +74,8 @@ namespace Heap
                 {
                     break;
                 }
-                else if (_list[parentIndex - 1].Data.Weight >= _list[currentIndex - 1].Data.Weight)
+                
+                if (_list[parentIndex - 1].Data.Weight >= _list[currentIndex - 1].Data.Weight)
                 {
                     break;
                 }
@@ -83,13 +84,15 @@ namespace Heap
             }
         }
 
-        public void Pop()
+        public Item Pop()
         {
-            Remove(0);
+            return Remove(0);
         }
 
-        public void Remove(int index)
+        public Item Remove(int index)
         {
+            Item result = _list[index];
+            
             _list[index] = _list[_list.Count - 1];
 
             _list.RemoveAt(_list.Count - 1);
@@ -110,7 +113,7 @@ namespace Heap
                 int child = left;
                 if (right <= currentSize)
                 {
-                    if (_list[right].Data.IsTarget)
+                    if (_list[right - 1].Data.IsTarget)
                     {
                         child = left;
                     }
@@ -134,17 +137,21 @@ namespace Heap
                 {
                     break;
                 }
-                else if (_list[currentIndex - 1].Data.Size < _list[child - 1].Data.Size)
+                
+                if (_list[currentIndex - 1].Data.Size < _list[child - 1].Data.Size)
                 {
                     break;
                 }
-                else if (_list[currentIndex - 1].Data.Size == _list[child - 1].Data.Size && _list[currentIndex - 1].Data.Weight > _list[child - 1].Data.Weight)
+                
+                if (_list[currentIndex - 1].Data.Size == _list[child - 1].Data.Size && _list[currentIndex - 1].Data.Weight > _list[child - 1].Data.Weight)
                 {
                     break;
                 }
 
                 Swap(ref currentIndex, child);
             }
+
+            return result;
         }
 
         public void Remove(Item item)
@@ -171,7 +178,7 @@ namespace Heap
 
     public class Heap<T>
     {
-        private List<T> _list;
+        private List<T> _list = new List<T>();
         public delegate bool Compare<T1, T2>(T1 left, T2 right);
 
         private Compare<T, T> _compare;
@@ -230,7 +237,7 @@ namespace Heap
             {
                 int parentIndex = currentIndex / 2;
 
-                if (_compare(_list[parentIndex], _list[currentIndex]))
+                if (_compare(_list[parentIndex - 1], _list[currentIndex - 1]))
                 {
                     break;
                 }
@@ -239,8 +246,9 @@ namespace Heap
             }
         }
 
-        public void Pop()
+        public T Pop()
         {
+            T result = _list[0];
             _list[0] = _list[_list.Count - 1];
 
             _list.RemoveAt(_list.Count - 1);
@@ -259,12 +267,9 @@ namespace Heap
                 }
 
                 int child = left;
-                if (right <= currentSize)
+                if (right <= currentSize && _compare(_list[right - 1], _list[left - 1]))
                 {
-                    if (_compare(_list[left - 1], _list[right - 1]))
-                    {
-                        child = right;
-                    }
+                    child = right;
                 }
 
                 if (_compare(_list[currentIndex - 1], _list[child - 1]))
@@ -274,6 +279,8 @@ namespace Heap
                 
                 Swap(ref currentIndex, child);
             }
+
+            return result;
         }
     }
 }

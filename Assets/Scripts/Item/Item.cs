@@ -28,7 +28,30 @@ public class Item : MonoBehaviour
         CurrentState = EItemState.UNPACKED;
         _isPacked = false;
 
-        ItemManager.Instance.Items.Push(this);
+        //ItemManager.Instance.Items.Push(this);
+    }
+
+    // Heap 테스트 용
+    //private void Start()
+    //{
+    //    int[] ints = { 4, 3, 2, 5, 1 };
+
+    //    Heap.Heap<int> heap = new Heap.Heap<int>(compare);
+
+    //    foreach(int num in ints)
+    //    {
+    //        heap.Push(num);
+    //    }
+
+    //    while(!heap.Empty())
+    //    {
+    //        Debug.Log(heap.Pop());
+    //    }
+    //}
+
+    private bool compare(int left, int right)
+    {
+        return left >= right;
     }
 
     private void Update()
