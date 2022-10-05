@@ -8,13 +8,11 @@ public class PlayerInteraction : Worker
   
     [SerializeField]
     private Transform _rightHand;
-    [SerializeField]
-    private OVRGrabber _grabber;
     private PlayerInventory _playerInventory;
     private LayerMask InterativeLayer = 1 << 5;
     private float _interactDiastance = 5f;
     private Item _grapsedItem;
-
+    private Item _item;
     public UnityEvent Onpack = new UnityEvent();
     public UnityEvent OnUnPack = new UnityEvent();
 
@@ -22,11 +20,12 @@ public class PlayerInteraction : Worker
     private void Start()
     {
         _playerInventory = GetComponent<PlayerInventory>();
-
+       _item.OnGrabChanged += PickAndDropItem;
         Onpack.RemoveListener(PackItem);
         Onpack.AddListener(PackItem);
         OnUnPack.RemoveListener(UnPackItem);
         OnUnPack.AddListener(UnPackItem);
+        
     }
    
     private void Update()
