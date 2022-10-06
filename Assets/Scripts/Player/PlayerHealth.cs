@@ -25,7 +25,7 @@ public class PlayerHealth : MonoBehaviour
     public void GotDamage()
     {
         // �켱 �κ��丮�� ó� �ε����� ����ϴ� ����� ��.
-        if(_inventory.Inventory.Count != 0)
+        if(_inventory.Inventory.Empty())
         {
             _lostItem = _inventory.Inventory[0];
         }
