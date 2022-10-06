@@ -1,26 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Heap;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public List<Item> Inventory = new List<Item>();
+    public InventoryHeap Inventory = new InventoryHeap();
 
     public void PushItemToInventory(Item item)
     {
         if(item != null)
         { 
-            Inventory.Add(item);
+            Inventory.Push(item);
         }
     }
 
     public Item PopItemFromInventory(Item item)
     {
-        if(Inventory.Contains(item))
+        if (item != null)
         {
             Inventory.Remove(item);
             return item;
-
         }
         else
         {

@@ -158,7 +158,7 @@ public class PlayerInteraction : Worker
         //    _grapsedItem.Gr
         //}
 
-        int ranNum = Random.Range(0, _playerInventory.Inventory.Count);
+        int ranNum = Random.Range(0, _playerInventory.Inventory.Size());
 
         Item item = _playerInventory.Inventory[ranNum];
 
