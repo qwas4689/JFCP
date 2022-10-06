@@ -14,7 +14,9 @@ public enum EItemState
 
 public class Item : MonoBehaviour
 {
+
     public static event Action<bool> OnGrabChanged;
+
     private bool _isGrabbed;
     public bool IsGrabbed
     {
