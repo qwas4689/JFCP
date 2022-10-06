@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,20 @@ public enum EItemState
 
 public class Item : MonoBehaviour
 {
+
+    public static event Action<bool> OnGrabChanged;
+
+    private bool _isGrabbed;
+    public bool IsGrabbed
+    {
+        get { return _isGrabbed; }
+        set 
+        {
+            _isGrabbed = _grabbable.isGrabbed;
+            OnGrabChanged.Invoke(_isGrabbed);
+        }
+    }
+
     public EItemState CurrentState { get; private set; }
     public ItemData Data;
 
@@ -27,49 +42,38 @@ public class Item : MonoBehaviour
         _grabbable = GetComponent<OVRGrabbable>();
         CurrentState = EItemState.UNPACKED;
         _isPacked = false;
+        _isGrabbed = false;
 
         ItemManager.Instance.Items.Push(this);
     }
 
-    // Heap �׽�Ʈ ��
+    // Heap Å×½ºÆ® ¿ë
     //private void Start()
     //{
     //    int[] ints = { 4, 3, 2, 5, 1 };
-
     //    Heap.Heap<int> heap = new Heap.Heap<int>(compare);
-
+    //
     //    foreach(int num in ints)
     //    {
     //        heap.Push(num);
     //    }
-
+    //
     //    while(!heap.Empty())
     //    {
     //        Debug.Log(heap.Pop());
     //    }
     //}
-
-    private bool compare(int left, int right)
-    {
-        return left >= right;
-    }
+    //
+    //private bool compare(int left, int right)
+    //{
+    //    return left >= right;
+    //}
 
     private void Update()
     {
-        if(_grabbable.isGrabbed)
+        if(IsGrabbed != _grabbable.isGrabbed)
         {
-            SetGrasped();
-        }
-        else
-        {
-            if (_isPacked)
-            {
-                CurrentState = EItemState.PACKED;
-            }
-            else
-            {
-                CurrentState = EItemState.UNPACKED;
-            }
+            IsGrabbed = _grabbable.isGrabbed;
         }
     }
 

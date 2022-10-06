@@ -11,7 +11,7 @@ public abstract class Worker : MonoBehaviour
 
     protected GameObject PickedItemGameObject;
 
-    private Item _focusedItem;
+    protected Item _focusedItem;
 
     protected Tool SelectedTool;
 
@@ -26,9 +26,9 @@ public abstract class Worker : MonoBehaviour
 
     protected abstract void PackItem();
 
-    protected abstract void PickItem();
+    //protected abstract void PickItem();
 
-    protected abstract void DropItem();
+    //protected abstract void DropItem();
 
     protected abstract void SelectTool();
 
