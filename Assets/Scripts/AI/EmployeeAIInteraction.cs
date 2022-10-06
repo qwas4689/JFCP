@@ -55,15 +55,15 @@ public class EmployeeAIInteraction : Worker
 
     }
 
-    protected override void PickItem()
-    {
+    //protected override void PickItem()
+    //{
         
-    }
+    //}
 
-    protected override void DropItem()
-    {
-        // 골에 넣었을 때
-    }
+    //protected override void DropItem()
+    //{
+    //    // 골에 넣었을 때
+    //}
 
     protected override void SelectTool()
     {

@@ -3,17 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum EPlayerState
-{
-    IDLE,
-    WORKING,
-    STEALING,
-    DAMAGED,
-    MAX
-}
-
-
-using UnityEngine.Events;
 
 public enum EPlayerState
 {
