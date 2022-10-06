@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class Obstacle : MonoBehaviour, IBeatable
 {
-    public UnityEvent OnStappedByPlayer;
+    public static UnityEvent OnSteppedByPlayer;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -17,6 +17,6 @@ public class Obstacle : MonoBehaviour, IBeatable
 
     public void HitPlayer()
     {
-        OnStappedByPlayer.Invoke();
+        OnSteppedByPlayer.Invoke();
     }
 }
