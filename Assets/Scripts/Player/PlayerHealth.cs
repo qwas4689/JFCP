@@ -13,17 +13,6 @@ public enum EPlayerState
 }
 
 
-using UnityEngine.Events;
-
-public enum EPlayerState
-{
-    IDLE,
-    WORKING,
-    STEALING,
-    DAMAGED,
-    MAX
-}
-
 
 public class PlayerHealth : MonoBehaviour
 {

@@ -5,14 +5,14 @@ using UnityEngine.AI;
 
 public class AIMovement : MonoBehaviour
 {
-    protected AIInteraction _interaction;
+    //protected AIInteraction _interaction;
     protected NavMeshAgent _agent;
     protected Transform _targetPosition;
     protected Item _nextItem;
     protected LayerMask _itemLayer = 1 << 3;
     protected void Awake()
     {
-        _interaction = GetComponent<AIInteraction>();
+       // _interaction = GetComponent<AIInteraction>();
         _agent = GetComponent<NavMeshAgent>();
 
         _agent.isStopped = true;

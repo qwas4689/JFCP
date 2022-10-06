@@ -12,6 +12,7 @@ public class PlayerInteraction : Worker
     private PlayerHealth _playerHealth;
     private PlayerInventory _playerInventory;
     private Item _grapsedItem;
+    private LayerMask InterativeLayer = 1 << 6;
     private float _interactDiastance = 5f;
 
     public UnityEvent Onpack = new UnityEvent();
@@ -56,16 +57,13 @@ public class PlayerInteraction : Worker
         RaycastHit hit;
 
 
-        if (Physics.Raycast(ray, out hit, _interactDiastance))
+        if (Physics.Raycast(ray, out hit, _interactDiastance, InterativeLayer))
         {
-            if (hit.collider.CompareTag("Item"))
-            {
-                _focusedItem = hit.collider.GetComponent<Item>();
-            }
-            else
-            {
-                OutFocusItem();
-            }
+           _focusedItem = hit.collider.GetComponent<Item>();
+        }
+        else
+        {
+            OutFocusItem();
         }
 
         PackAndUnpackItem();
