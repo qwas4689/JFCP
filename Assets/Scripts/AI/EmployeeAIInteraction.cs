@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIInteraction : MonoBehaviour
+public class EmployeeAIInteraction : Worker
 {
-
+    private Item _item;
 
     void Start()
     {
@@ -38,5 +38,40 @@ public class AIInteraction : MonoBehaviour
     private void MoveToOriginalPosition()
     {
 
+    }
+
+    protected override void OnFocusItem()
+    {
+        
+    }
+
+    protected override void OutFocusItem()
+    {
+        
+    }
+
+    protected override void PackItem()
+    {
+
+    }
+
+    protected override void PickItem()
+    {
+        
+    }
+
+    protected override void DropItem()
+    {
+        // 골에 넣었을 때
+    }
+
+    protected override void SelectTool()
+    {
+        // 아이템 포장만
+    }
+
+    protected override void UseToolToItem()
+    {
+        // 
     }
 }

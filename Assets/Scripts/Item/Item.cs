@@ -45,7 +45,7 @@ public class Item : MonoBehaviour
         ItemManager.Instance.Items.Push(this);
     }
 
-    // Heap �׽�Ʈ ��
+    // Heap Å×½ºÆ® ¿ë
     //private void Start()
     //{
     //    int[] ints = { 4, 3, 2, 5, 1 };

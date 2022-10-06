@@ -1,37 +1,91 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class AISencer : MonoBehaviour
+public class AISensor : MonoBehaviour
 {
-    private PlayerInteraction playerInteraction;
-    private Camera aiSight;
+    public UnityEvent CatchPlayerStill = new UnityEvent();
 
-    private int playerState;
+    private PlayerHealth _playerHealth;
+    private GameObject _player;
+    private Camera _aiSight;
 
+    private Vector3 _playerPosition;
+    private Plane[] _eyePlanes;
+
+    private bool _isFindPlayer = false;
+    private float _aiColliderRadiusSize = 5f;
+    private int _playerState;
 
     void Awake()
     {
-        playerInteraction = GetComponent<PlayerInteraction>();
+        _playerHealth = GetComponent<PlayerHealth>();
+        
+    }
+
+    private void Start()
+    {
+        _aiSight = transform.GetComponentInChildren<Camera>();
+        // PlayerHealthì˜ OnDamage ì˜ AddListener(SearchPlayer(gameObject.transform.position, _aiColliderRadiusSize)); ì¶”ê°€
     }
 
     void Update()
     {
-        // »óÅÂ º¯È­¸¦ playerState¿¡ ¹Ş¾Æ¿À±â or ÀÌº¥Æ®·Î »óÈ² ¹Ş±â
+        // ìƒíƒœ ë³€í™”ë¥¼ _playerHealthì— ë°›ì•„ì˜¤ê¸° or ì´ë²¤íŠ¸ë¡œ ìƒí™© ë°›ê¸°
+    }
+
+    private void UpdateAIState()
+    {
+        if (IsFindPlayer())
+        {
+            // ì°¾ìœ¼ë©´ ê±°ê¸°ë¡œ ì´ë™í•˜ë¼ê³  ì´ë²¤íŠ¸ ì˜ê¸°..?
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    private bool IsFindPlayer()
+    {
+        if (/* í”Œë ˆì´ì–´ì˜ ìƒíƒœê°€ ë„ë‘‘ì§ˆ ìƒíƒœê°€ ì•„ë‹ë•Œ ë§Œ */ true)
+        {
+            return false;
+        }
+
+        Bounds targetBounds = _player.GetComponent<SkinnedMeshRenderer>().bounds;
+        _eyePlanes = GeometryUtility.CalculateFrustumPlanes(_aiSight);
+        _isFindPlayer = GeometryUtility.TestPlanesAABB(_eyePlanes, targetBounds);
+
+        return _isFindPlayer;
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î¿Í ´ê¾ÒÀ» ¶§ ½ÇÇà
+    /// ì½œë¼ì´ë”ì— í”Œë ˆì´ì–´ê°€ ë‹¿ì•˜ì„ ë•Œ CatchPlayerStill ì´ë²¤íŠ¸ Invoke()
     /// </summary>
-    /// <param name="other">ÇÃ·¹ÀÌ¾î</param>
+    /// <param name="other">í”Œë ˆì´ì–´</param>
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            //if (playerState == Stealing)
-            //{
-            //    // ÇÃ·¹ÀÌ¾î°¡ µµµÏÁú »óÅÂÀÏ ¶§ È®ÀÎ
-            //}
+            CatchPlayerStill.Invoke();
+        }
+    }
+
+    /// <summary>
+    /// í”Œë ˆì´ì–´ê°€ ë ˆê³ ë¥¼ ë°Ÿì•˜ì„ ë•Œ ë‚˜ì˜¤ëŠ” ë™ì  ì½œë¼ì´ë”
+    /// </summary>
+    /// <param name="center"></param>
+    /// <param name="radius"></param>
+    private void SearchPlayer(Vector3 center, float radius)
+    {
+        int _maxColliders = 10;
+        Collider[] hitColliders = new Collider[_maxColliders];
+        int _numColliders = Physics.OverlapSphereNonAlloc(center, radius, hitColliders);
+        for (int i = 0; i < _numColliders; i++)
+        {
+            hitColliders[i].SendMessage("Serch Player!");
         }
     }
 }
