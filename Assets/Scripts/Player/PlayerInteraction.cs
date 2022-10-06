@@ -38,6 +38,19 @@ public class PlayerInteraction : Worker
         AddEventListener();
     }
 
+    private void AddEventListener()
+    {
+        //Onpack.AddListener(PackItem);
+
+        //OnUnPack.AddListener(UnPackItem);
+
+        Item.OnGrabChanged += PickAndDropItem;
+
+        Obstacle.OnSteppedByPlayer.AddListener(DroppedItemByObstacle);
+
+        _playerHealth.OnDamage.AddListener(DroppedItemByAI);
+
+    }
 
     private void Update()
     {
@@ -166,19 +179,7 @@ public class PlayerInteraction : Worker
     {
 
     }
-    private void AddEventListener()
-    {
-        //Onpack.AddListener(PackItem);
-
-        //OnUnPack.AddListener(UnPackItem);
-
-        Item.OnGrabChanged += PickAndDropItem;
-
-        Obstacle.OnSteppedByPlayer.AddListener(DroppedItemByObstacle);
-
-        _playerHealth.OnDamage.AddListener(DroppedItemByAI);
-
-    }
+    
     private void OnDisable()
     {
         Item.OnGrabChanged -= PickAndDropItem;
