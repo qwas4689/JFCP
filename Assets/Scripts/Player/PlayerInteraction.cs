@@ -179,7 +179,7 @@ public class PlayerInteraction : Worker
     {
 
     }
-    
+ 
     private void OnDisable()
     {
         Item.OnGrabChanged -= PickAndDropItem;

@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 
 
-namespace Heap
+namespace DataStructure.Heap
 {
     public class ItemHeap
     {
