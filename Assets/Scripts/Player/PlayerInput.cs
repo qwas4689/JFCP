@@ -7,6 +7,7 @@ public class PlayerInput : MonoBehaviour
 
     public float Xinput { get; private set; }
     public float Zinput { get; private set; }
+    public bool IsPackButtonPressed;
     private PlayerInteraction _playerInteraction;
     private Item _item;
     void Start()
@@ -21,24 +22,16 @@ public class PlayerInput : MonoBehaviour
         Zinput = Input.GetAxisRaw("Vertical");
      
 
-        if(_item.CurrentState != EItemState.GRASPED) // unpick
-        {
-
+        
             if(OVRInput.GetDown(OVRInput.RawButton.B))
             {
-                if(_item.CurrentState == EItemState.PACKED) // packed
-                {
-                    _playerInteraction.OnUnPack.Invoke();
-
-                }
-                else if(_item.CurrentState == EItemState.UNPACKED)
-                {
-                    _playerInteraction.Onpack.Invoke();
-
-                }
+                IsPackButtonPressed = true;
             }
-
-        }
+            else
+            {
+                IsPackButtonPressed = false;
+            }
+        
         
     }
 
