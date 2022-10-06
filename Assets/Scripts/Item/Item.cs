@@ -27,21 +27,20 @@ public class Item : MonoBehaviour
             OnGrabChanged.Invoke(_isGrabbed);
         }
     }
+    public bool IsPacked { get; private set; }
 
     public EItemState CurrentState { get; private set; }
     public ItemData Data;
-
-    //private ItemManager _manager;
+    
     private Rigidbody _rigidbody;
     private OVRGrabbable _grabbable;
-    private bool _isPacked;
     
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _grabbable = GetComponent<OVRGrabbable>();
         CurrentState = EItemState.UNPACKED;
-        _isPacked = false;
+        IsPacked = false;
         _isGrabbed = false;
 
         ItemManager.Instance.Items.Push(this);
@@ -79,7 +78,7 @@ public class Item : MonoBehaviour
 
     public void SetPacked()
     {
-        _isPacked = true;
+        IsPacked = true;
 
         if (CurrentState == EItemState.UNPACKED)
         {
@@ -89,7 +88,7 @@ public class Item : MonoBehaviour
 
     public void SetUnPacked()
     {
-        _isPacked = false;
+        IsPacked = false;
 
         if (CurrentState == EItemState.PACKED)
         {
