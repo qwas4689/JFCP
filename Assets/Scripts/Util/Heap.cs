@@ -16,11 +16,6 @@ namespace Heap
             {
                 return _list[index];
             }
-
-            //set
-            //{
-            //    _list[index] = value;
-            //}
         }
 
         private void Swap(ref int left, int right)
@@ -55,7 +50,7 @@ namespace Heap
 
             if (item.Data.IsTarget)
             {
-                return;
+                item.Data.Size = EItemSize.MAX;
             }
 
             int currentIndex = Size();
@@ -63,12 +58,6 @@ namespace Heap
             while (currentIndex > 1)
             {
                 int parentIndex = currentIndex / 2;
-
-                if (_list[parentIndex - 1].Data.IsTarget)
-                {
-                    Swap(ref currentIndex, parentIndex);
-                    continue;
-                }
 
                 if (_list[parentIndex - 1].Data.Size < _list[currentIndex - 1].Data.Size)
                 {
@@ -109,15 +98,11 @@ namespace Heap
                 {
                     break;
                 }
-
+                
                 int child = left;
                 if (right <= currentSize)
                 {
-                    if (_list[right - 1].Data.IsTarget)
-                    {
-                        child = left;
-                    }
-                    else if (_list[left - 1].Data.Size > _list[right - 1].Data.Size)
+                    if (_list[left - 1].Data.Size > _list[right - 1].Data.Size)
                     {
                         child = right;
                     }
@@ -125,17 +110,6 @@ namespace Heap
                     {
                         child = right;
                     }
-                }
-
-                if (_list[currentIndex - 1].Data.IsTarget)
-                {
-                    Swap(ref currentIndex, child);
-                    continue;
-                }
-
-                if (_list[child - 1].Data.IsTarget)
-                {
-                    break;
                 }
                 
                 if (_list[currentIndex - 1].Data.Size < _list[child - 1].Data.Size)
@@ -185,11 +159,6 @@ namespace Heap
             {
                 return _list[index];
             }
-
-            //set
-            //{
-            //    _list[index] = value;
-            //}
         }
 
         private void Swap(ref int left, int right)
@@ -222,21 +191,16 @@ namespace Heap
         {
             _list.Add(item);
 
+            if (item.Data.IsTarget)
+            {
+                item.Data.Price = int.MaxValue;
+            }
+
             int currentIndex = Size();
 
             while (currentIndex > 1)
             {
                 int parentIndex = currentIndex / 2;
-
-                if (_list[parentIndex - 1].Data.IsTarget)
-                {
-                    break;
-                }
-
-                if (_list[currentIndex - 1].Data.IsTarget)
-                {
-                    continue;
-                }
 
                 if (_list[parentIndex - 1].Data.Price >= _list[currentIndex - 1].Data.Price)
                 {
@@ -265,11 +229,6 @@ namespace Heap
 
             while (currentIndex < currentSize)
             {
-                if (_list[currentIndex - 1].Data.IsTarget)
-                {
-                    break;
-                }
-                
                 int left = currentIndex * 2;
                 int right = left + 1;
 
