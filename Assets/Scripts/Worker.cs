@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class Worker : MonoBehaviour
 {
-    private PlayerInteraction playerInteraction;
 
     [SerializeField]
     private Item _pickedItem;
@@ -17,7 +16,7 @@ public abstract class Worker : MonoBehaviour
 
     private void Start()
     {
-        playerInteraction = GetComponent<PlayerInteraction>();
+
     }
 
     protected abstract void OnFocusItem();
