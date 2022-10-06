@@ -8,10 +8,11 @@ public class PlayerInteraction : Worker
   
     [SerializeField]
     private Transform _rightHand;
+    private PlayerInput _playerInput;
     private PlayerHealth _playerHealth;
     private PlayerInventory _playerInventory;
     private Item _grapsedItem;
-    private LayerMask InterativeLayer = 1 << 5;
+    private LayerMask InterativeLayer = 1 << 6;
     private float _interactDiastance = 5f;
 
     public UnityEvent Onpack = new UnityEvent();
@@ -22,23 +23,28 @@ public class PlayerInteraction : Worker
     {
         _playerInventory = GetComponent<PlayerInventory>();
         _playerHealth = GetComponent<PlayerHealth>();
+        _playerInput = GetComponent<PlayerInput>();
+
         Item.OnGrabChanged -= PickAndDropItem;
-        Item.OnGrabChanged += PickAndDropItem;
+
         Obstacle.OnSteppedByPlayer.RemoveListener(DroppedItemByObstacle);
-        Obstacle.OnSteppedByPlayer.AddListener(DroppedItemByObstacle);
-        Onpack.RemoveListener(PackItem);
-        Onpack.AddListener(PackItem);
-        OnUnPack.RemoveListener(UnPackItem);
-        OnUnPack.AddListener(UnPackItem);
+
+        //Onpack.RemoveListener(PackItem);
+
+        //OnUnPack.RemoveListener(UnPackItem);
+
         _playerHealth.OnDamage.RemoveListener(DroppedItemByAI);
-        _playerHealth.OnDamage.AddListener(DroppedItemByAI);
+
+        AddEventListener();
     }
-   
+
+
     private void Update()
     {
         OnFocusItem();
-    }
 
+       
+    }
     protected override void OnFocusItem()
     {
         if (_grapsedItem != null)
@@ -53,14 +59,47 @@ public class PlayerInteraction : Worker
 
         if (Physics.Raycast(ray, out hit, _interactDiastance, InterativeLayer))
         {
-            if (hit.collider.CompareTag("Item"))
+           _focusedItem = hit.collider.GetComponent<Item>();
+        }
+        else
+        {
+            OutFocusItem();
+        }
+
+        PackAndUnpackItem();
+    }
+
+
+    private void PackAndUnpackItem()
+    {
+        
+        if(_focusedItem == null)
+        {
+            return;
+        }
+        
+        
+        if (_focusedItem.CurrentState != EItemState.GRASPED) // unpick
+        {
+
+            if (_playerInput.IsPackButtonPressed)
             {
-                _focusedItem = hit.collider.GetComponent<Item>();
+                if (_focusedItem.CurrentState == EItemState.PACKED) // packed
+                {
+                    UnPackItem();
+
+                }
+                else if (_focusedItem.CurrentState == EItemState.UNPACKED)
+                {
+                    PackItem();
+
+                }
             }
             else
             {
-                OutFocusItem();
+                return;
             }
+            
         }
     }
 
@@ -127,13 +166,28 @@ public class PlayerInteraction : Worker
     {
 
     }
+    private void AddEventListener()
+    {
+        //Onpack.AddListener(PackItem);
 
+        //OnUnPack.AddListener(UnPackItem);
+
+        Item.OnGrabChanged += PickAndDropItem;
+
+        Obstacle.OnSteppedByPlayer.AddListener(DroppedItemByObstacle);
+
+        _playerHealth.OnDamage.AddListener(DroppedItemByAI);
+
+    }
     private void OnDisable()
     {
         Item.OnGrabChanged -= PickAndDropItem;
+
         Obstacle.OnSteppedByPlayer.RemoveListener(DroppedItemByObstacle);
-        Onpack.RemoveListener(PackItem);
-        OnUnPack.RemoveListener(UnPackItem);
+
         _playerHealth.OnDamage.RemoveListener(DroppedItemByAI);
+
+        //Onpack.RemoveListener(PackItem);
+        //OnUnPack.RemoveListener(UnPackItem);
     }
 }
