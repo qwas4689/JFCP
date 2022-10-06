@@ -27,19 +27,19 @@ public class AISensor : MonoBehaviour
     private void Start()
     {
         _aiSight = transform.GetComponentInChildren<Camera>();
-        // PlayerHealthÀÇ OnDamage ÀÇ AddListener(SearchPlayer(gameObject.transform.position, _aiColliderRadiusSize)); Ãß°¡
+        // PlayerHealthì˜ OnDamage ì˜ AddListener(SearchPlayer(gameObject.transform.position, _aiColliderRadiusSize)); ì¶”ê°€
     }
 
     void Update()
     {
-        // »óÅÂ º¯È­¸¦ _playerHealth¿¡ ¹Ş¾Æ¿À±â or ÀÌº¥Æ®·Î »óÈ² ¹Ş±â
+        // ìƒíƒœ ë³€í™”ë¥¼ _playerHealthì— ë°›ì•„ì˜¤ê¸° or ì´ë²¤íŠ¸ë¡œ ìƒí™© ë°›ê¸°
     }
 
     private void UpdateAIState()
     {
         if (IsFindPlayer())
         {
-            // Ã£À¸¸é °Å±â·Î ÀÌµ¿ÇÏ¶ó°í ÀÌº¥Æ® ½î±â..?
+            // ì°¾ìœ¼ë©´ ê±°ê¸°ë¡œ ì´ë™í•˜ë¼ê³  ì´ë²¤íŠ¸ ì˜ê¸°..?
         }
         else
         {
@@ -49,7 +49,7 @@ public class AISensor : MonoBehaviour
 
     private bool IsFindPlayer()
     {
-        if (/* ÇÃ·¹ÀÌ¾îÀÇ »óÅÂ°¡ µµµÏÁú »óÅÂ°¡ ¾Æ´Ò¶§ ¸¸ */ true)
+        if (/* í”Œë ˆì´ì–´ì˜ ìƒíƒœê°€ ë„ë‘‘ì§ˆ ìƒíƒœê°€ ì•„ë‹ë•Œ ë§Œ */ true)
         {
             return false;
         }
@@ -62,9 +62,9 @@ public class AISensor : MonoBehaviour
     }
 
     /// <summary>
-    /// Äİ¶óÀÌ´õ¿¡ ÇÃ·¹ÀÌ¾î°¡ ´ê¾ÒÀ» ¶§ CatchPlayerStill ÀÌº¥Æ® Invoke()
+    /// ì½œë¼ì´ë”ì— í”Œë ˆì´ì–´ê°€ ë‹¿ì•˜ì„ ë•Œ CatchPlayerStill ì´ë²¤íŠ¸ Invoke()
     /// </summary>
-    /// <param name="other">ÇÃ·¹ÀÌ¾î</param>
+    /// <param name="other">í”Œë ˆì´ì–´</param>
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -74,7 +74,7 @@ public class AISensor : MonoBehaviour
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î°¡ ·¹°í¸¦ ¹â¾ÒÀ» ¶§ ³ª¿À´Â µ¿Àû Äİ¶óÀÌ´õ
+    /// í”Œë ˆì´ì–´ê°€ ë ˆê³ ë¥¼ ë°Ÿì•˜ì„ ë•Œ ë‚˜ì˜¤ëŠ” ë™ì  ì½œë¼ì´ë”
     /// </summary>
     /// <param name="center"></param>
     /// <param name="radius"></param>
