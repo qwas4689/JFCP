@@ -23,16 +23,16 @@ public class PlayerHealth : MonoBehaviour
 
     public void GotDamage()
     {
-        // ¿ì¼± ÀÎº¥Åä¸®ÀÇ Ã³À½ ÀÎµ¦½º¸¦ Á¢±ÙÇÏ´Â °ÍÀ¸·Î ÇÔ.
+        // ï¿½ì¼± ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ Ã³ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
         if(_inventory.Inventory.Count != 0)
         {
             _lostItem = _inventory.Inventory[0];
         }
 
         OnDamage.Invoke(_lostItem);
-        // Å¸°ÙÀÌ ÀÖÀ¸¸é Å¸°Ù¸ÕÀú
+        // Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ù¸ï¿½ï¿½ï¿½
 
-        // Å¸°ÙÀÌ ¾øÀ¸¸é °¡Ä¡¼øÀ¸·Î
+        // Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½
 
     }
 
@@ -47,5 +47,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnDisable()
     {
+
     }
 }
