@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Heap;
+using DataStructure.Heap;
 
 public class ItemManager : MonoBehaviour
 {

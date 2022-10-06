@@ -30,8 +30,7 @@ public class Item : MonoBehaviour
 
     public EItemState CurrentState { get; private set; }
     public ItemData Data;
-
-    //private ItemManager _manager;
+    
     private Rigidbody _rigidbody;
     private OVRGrabbable _grabbable;
     private bool _isPacked;
@@ -79,22 +78,20 @@ public class Item : MonoBehaviour
 
     public void SetPacked()
     {
-        _isPacked = true;
-
-        if (CurrentState == EItemState.UNPACKED)
+        if (CurrentState == EItemState.UNPACKED || !_isPacked)
         {
             CurrentState = EItemState.PACKED;
         }
+        _isPacked = true;
     }
 
     public void SetUnPacked()
     {
-        _isPacked = false;
-
-        if (CurrentState == EItemState.PACKED)
+        if (CurrentState == EItemState.PACKED || _isPacked)
         {
             CurrentState = EItemState.UNPACKED;
         }
+        _isPacked = false;
     }
 
     public void SetGrasped()
