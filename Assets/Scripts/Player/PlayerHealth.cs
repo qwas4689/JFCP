@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 public enum EPlayerState
 {
     IDLE,
@@ -11,7 +12,6 @@ public enum EPlayerState
     DAMAGED,
     MAX
 }
-
 
 
 public class PlayerHealth : MonoBehaviour
